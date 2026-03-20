@@ -1374,23 +1374,12 @@ const AnimatedRoutes = () => {
 };
 
 // PWA Install Banner Component
-const InstallBanner = ({ installPrompt, onInstall }: { installPrompt: any, onInstall: () => void }) => {
+const InstallBanner = ({ installPrompt, onInstall, visitCount }: { installPrompt: any, onInstall: () => void, visitCount: number }) => {
   const location = useLocation();
   const [showBanner, setShowBanner] = useState(false);
 
   useEffect(() => {
-    if (!installPrompt) return;
-
-    // Visit counting logic
-    const currentVisits = parseInt(localStorage.getItem('chithi_visit_count') || '0', 10);
-    const isNewSession = !sessionStorage.getItem('chithi_session_active');
-    
-    let visitCount = currentVisits;
-    if (isNewSession) {
-      visitCount = currentVisits + 1;
-      localStorage.setItem('chithi_visit_count', visitCount.toString());
-      sessionStorage.setItem('chithi_session_active', 'true');
-    }
+    if (!installPrompt || visitCount === 0) return;
 
     const dismissedAt = parseInt(localStorage.getItem('chithi_install_dismissed_at') || '-10', 10);
     const shouldSnooze = visitCount - dismissedAt < 3;
@@ -1400,7 +1389,7 @@ const InstallBanner = ({ installPrompt, onInstall }: { installPrompt: any, onIns
     } else {
       setShowBanner(false);
     }
-  }, [installPrompt, location.pathname]);
+  }, [installPrompt, location.pathname, visitCount]);
 
   if (!showBanner || !installPrompt) return null;
 
@@ -1414,18 +1403,20 @@ const InstallBanner = ({ installPrompt, onInstall }: { installPrompt: any, onIns
       >
         <div className="bg-white/90 backdrop-blur-xl border border-stone-200 p-4 rounded-3xl shadow-2xl flex items-center justify-between gap-4">
           <div className="flex items-center gap-3 text-left">
-            <div className="w-12 h-12 rounded-2xl bg-stone-900 flex items-center justify-center shrink-0">
-              <Download className="w-6 h-6 text-white" />
+            <div className="w-12 h-12 rounded-2xl bg-white border border-stone-100 flex items-center justify-center shrink-0 relative shadow-sm">
+              <img src="https://ik.imagekit.io/cursorstudios/chithi/logo.png?tr=w-100,q-80,f-auto" alt="Chithi Logo" className="w-8 h-8 object-contain" />
+              <div className="absolute -bottom-1.5 -right-1.5 bg-stone-900 rounded-lg p-1.5 shadow-lg border-2 border-white">
+                <Download className="w-3 h-3 text-white" />
+              </div>
             </div>
             <div>
-              <p className="text-sm font-bold text-stone-900 leading-tight">Install Chithi</p>
+              <p className="text-sm font-bold text-stone-900 leading-tightPlus">Install Chithi</p>
             </div>
           </div>
           <div className="flex gap-2 shrink-0">
             <button 
               onClick={() => {
-                const currentVisits = parseInt(localStorage.getItem('chithi_visit_count') || '0', 10);
-                localStorage.setItem('chithi_install_dismissed_at', currentVisits.toString());
+                localStorage.setItem('chithi_install_dismissed_at', visitCount.toString());
                 setShowBanner(false);
               }}
               className="px-3 py-2 text-xs font-semibold text-stone-400 hover:text-stone-600 transition-colors"
@@ -1447,8 +1438,21 @@ const InstallBanner = ({ installPrompt, onInstall }: { installPrompt: any, onIns
 
 export default function App() {
   const [installPrompt, setInstallPrompt] = useState<any>(null);
+  const [visitCount, setVisitCount] = useState(0);
 
   useEffect(() => {
+    // Visit counting logic (once per load)
+    const currentVisits = parseInt(localStorage.getItem('chithi_visit_count') || '0', 10);
+    const isNewSession = !sessionStorage.getItem('chithi_session_active');
+    
+    let currentCount = currentVisits;
+    if (isNewSession) {
+      currentCount = currentVisits + 1;
+      localStorage.setItem('chithi_visit_count', currentCount.toString());
+      sessionStorage.setItem('chithi_session_active', 'true');
+    }
+    setVisitCount(currentCount);
+
     const handler = (e: any) => {
       e.preventDefault();
       setInstallPrompt(e);
@@ -1470,7 +1474,7 @@ export default function App() {
     <BrowserRouter>
       <div className="min-h-screen bg-[#fcfcfc] font-sans text-stone-900 selection:bg-stone-200">
         <AnimatedRoutes />
-        <InstallBanner installPrompt={installPrompt} onInstall={handleInstallClick} />
+        <InstallBanner installPrompt={installPrompt} onInstall={handleInstallClick} visitCount={visitCount} />
       </div>
     </BrowserRouter>
   );
