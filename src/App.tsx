@@ -348,7 +348,7 @@ const AboutView = () => {
             <div className="mt-10 pt-6 border-t border-stone-100 text-center space-y-2">
               
               <p className="font-sans text-xs text-stone-400 pt-2">
-                In collaboration with <span className="font-semibold text-stone-500">Project Eunoia</span> <span className="mx-1 opacity-50">•</span> v1.0.0
+                In collaboration with <span className="font-semibold text-stone-500">Project Eunoia</span> <span className="mx-1 opacity-50">•</span> v1.2.0
               </p>
               <p className="font-sans text-xs text-stone-400 pt-2">
                 Created by <span className="font-semibold text-stone-500">Nehan Yaser</span> & <span className="font-semibold text-stone-500">Mahian Arthob</span>
@@ -1384,6 +1384,61 @@ const AnimatedRoutes = () => {
   );
 };
 
+// Giveaway Alert Component
+const GiveawayAlert = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const isDismissed = localStorage.getItem('chithi_giveaway_dismissed');
+    if (!isDismissed) {
+      const timer = setTimeout(() => {
+        setIsVisible(true);
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  if (!isVisible) return null;
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: -100, opacity: 0 }}
+        className="fixed top-6 left-1/2 -translate-x-1/2 z-[100] w-auto max-w-[95%]"
+      >
+        <div className="bg-white/90 backdrop-blur-xl border border-stone-200/60 px-6 py-3 rounded-full shadow-2xl flex items-center gap-6 whitespace-nowrap">
+          <span className="text-[13px] font-medium text-stone-800 tracking-tight">Giveaway alert on Instagram</span>
+          <div className="flex gap-4 items-center border-l border-stone-100 pl-6">
+            <a 
+              href="https://www.instagram.com/p/DWHIeDVD5sl/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              onClick={() => {
+                setIsVisible(false);
+                localStorage.setItem('chithi_giveaway_dismissed', 'true');
+              }}
+              className="text-[13px] font-bold text-stone-900 hover:opacity-60 transition-opacity"
+            >
+              View
+            </a>
+            <button 
+              onClick={() => {
+                setIsVisible(false);
+                localStorage.setItem('chithi_giveaway_dismissed', 'true');
+              }}
+              className="text-[13px] font-bold text-stone-400 hover:text-stone-600 transition-colors"
+            >
+              Dismiss
+            </button>
+          </div>
+        </div>
+      </motion.div>
+    </AnimatePresence>
+  );
+};
+
 // PWA Install Banner Component
 const InstallBanner = ({ installPrompt, onInstall, visitCount }: { installPrompt: any, onInstall: () => void, visitCount: number }) => {
   const location = useLocation();
@@ -1484,6 +1539,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <div className="min-h-screen bg-[#fcfcfc] font-sans text-stone-900 selection:bg-stone-200">
+        <GiveawayAlert />
         <AnimatedRoutes />
         <InstallBanner installPrompt={installPrompt} onInstall={handleInstallClick} visitCount={visitCount} />
       </div>

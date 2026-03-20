@@ -41,6 +41,7 @@ export default defineConfig(({mode}) => {
           ]
         },
         workbox: {
+          cacheId: 'chithi-cache-v3',
           cleanupOutdatedCaches: true,
           skipWaiting: true,
           clientsClaim: true,
@@ -50,7 +51,7 @@ export default defineConfig(({mode}) => {
               urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
               handler: 'CacheFirst',
               options: {
-                cacheName: 'google-fonts-cache',
+                cacheName: 'google-fonts-cache-v2',
                 expiration: {
                   maxEntries: 10,
                   maxAgeSeconds: 60 * 60 * 24 * 365 // <== 365 days
