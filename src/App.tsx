@@ -29,22 +29,22 @@ const TEMPLATES = {
     shareBack: "https://ik.imagekit.io/cursorstudios/chithi/share/24.png"
   },
   4: {
-    front: 'https://ik.imagekit.io/cursorstudios/chithi/classic/7.png?tr=w-1000,q-80,f-auto',
-    back: 'https://ik.imagekit.io/cursorstudios/chithi/classic/8.png?tr=w-1000,q-80,f-auto',
+    front: 'https://ik.imagekit.io/cursorstudios/chithi/family/1.png?tr=w-1000,q-80,f-auto',
+    back: 'https://ik.imagekit.io/cursorstudios/chithi/family/2.png?tr=w-1000,q-80,f-auto',
     textColor: '#4a4a4a',
     shareFront: "https://ik.imagekit.io/cursorstudios/chithi/share/25.png",
     shareBack: "https://ik.imagekit.io/cursorstudios/chithi/share/26.png"
   },
   5: {
-    front: 'https://ik.imagekit.io/cursorstudios/chithi/classic/9.png?tr=w-1000,q-80,f-auto',
-    back: 'https://ik.imagekit.io/cursorstudios/chithi/classic/10.png?tr=w-1000,q-80,f-auto',
+    front: 'https://ik.imagekit.io/cursorstudios/chithi/family/3.png?tr=w-1000,q-80,f-auto',
+    back: 'https://ik.imagekit.io/cursorstudios/chithi/family/4.png?tr=w-1000,q-80,f-auto',
     textColor: '#4a4a4a',
     shareFront: "https://ik.imagekit.io/cursorstudios/chithi/share/27.png",
     shareBack: "https://ik.imagekit.io/cursorstudios/chithi/share/28.png"
   },
   6: {
-    front: 'https://ik.imagekit.io/cursorstudios/chithi/classic/11.png?tr=w-1000,q-80,f-auto',
-    back: 'https://ik.imagekit.io/cursorstudios/chithi/classic/12.png?tr=w-1000,q-80,f-auto',
+    front: 'https://ik.imagekit.io/cursorstudios/chithi/family/5.png?tr=w-1000,q-80,f-auto',
+    back: 'https://ik.imagekit.io/cursorstudios/chithi/family/6.png?tr=w-1000,q-80,f-auto',
     textColor: '#4a4a4a',
     shareFront: "https://ik.imagekit.io/cursorstudios/chithi/share/29.png",
     shareBack: "https://ik.imagekit.io/cursorstudios/chithi/share/30.png"
