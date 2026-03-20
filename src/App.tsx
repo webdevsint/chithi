@@ -304,8 +304,10 @@ const AboutView = () => {
         <meta name="description" content="Learn about the vision behind চিঠি (Chithi), a digital artifact designed with the soul of a handwritten letter." />
         <meta property="og:title" content="About - চিঠি (Chithi)" />
         <meta property="og:description" content="Learn about the vision behind চিঠি (Chithi), a digital artifact designed with the soul of a handwritten letter." />
+        <meta property="og:image" content="https://chithi.cursorstudios.net/meta.png" />
         <meta property="twitter:title" content="About - চিঠি (Chithi)" />
         <meta property="twitter:description" content="Learn about the vision behind চিঠি (Chithi), a digital artifact designed with the soul of a handwritten letter." />
+        <meta property="twitter:image" content="https://chithi.cursorstudios.net/meta.png" />
       </Helmet>
       <div className="w-full max-w-2xl bg-white p-8 md:p-12 rounded-[2rem] shadow-xl relative">
         <button onClick={() => navigate(-1)} className="absolute top-6 right-6 p-2 text-stone-400 hover:text-stone-900 transition-colors rounded-full hover:bg-stone-100">
@@ -435,6 +437,8 @@ const HomeView = () => {
       <Helmet>
         <title>চিঠি (Chithi) - Make Eid Personal</title>
         <meta name="description" content="Choose a classic template to bring back the magic of শৈশব. Write your heart out and send a digital card that feels like home." />
+        <meta property="og:image" content="https://chithi.cursorstudios.net/meta.png" />
+        <meta property="twitter:image" content="https://chithi.cursorstudios.net/meta.png" />
       </Helmet>
       {/* Header */}
       <header className="w-full p-6 md:p-10 flex justify-between items-center z-10">
@@ -805,6 +809,8 @@ const EditorView = () => {
       <Helmet>
         <title>Create Card - চিঠি (Chithi)</title>
         <meta name="description" content="Write your heart out and send a digital card that feels like home." />
+        <meta property="og:image" content="https://chithi.cursorstudios.net/meta.png" />
+        <meta property="twitter:image" content="https://chithi.cursorstudios.net/meta.png" />
       </Helmet>
       {/* Left: Preview */}
       <div className="flex-1 bg-[#fcfcfc] flex flex-col items-center justify-center p-8 min-[1300px]:p-12 relative overflow-y-auto">
@@ -991,8 +997,10 @@ const SharedCardView = () => {
         <meta name="description" content="Someone sent you a personal Eid card. Open it to see their message." />
         <meta property="og:title" content="You received a চিঠি (Chithi)" />
         <meta property="og:description" content="Someone sent you a personal Eid card. Open it to see their message." />
+        <meta property="og:image" content="https://chithi.cursorstudios.net/meta.png" />
         <meta property="twitter:title" content="You received a চিঠি (Chithi)" />
         <meta property="twitter:description" content="Someone sent you a personal Eid card. Open it to see their message." />
+        <meta property="twitter:image" content="https://chithi.cursorstudios.net/meta.png" />
       </Helmet>
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-3xl opacity-30 blur-[100px] bg-gradient-to-tr from-amber-100 to-emerald-50 pointer-events-none" />
 
