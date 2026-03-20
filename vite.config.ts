@@ -41,7 +41,7 @@ export default defineConfig(({mode}) => {
           ]
         },
         workbox: {
-          cacheId: 'chithi-cache-v3',
+          cacheId: 'chithi-cache-v4',
           cleanupOutdatedCaches: true,
           skipWaiting: true,
           clientsClaim: true,
