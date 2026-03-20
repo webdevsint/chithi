@@ -209,9 +209,30 @@ const CATEGORIES: { name: Category; templates: number[] }[] = [
   { name: 'Anime', templates: [11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22] },
 ];
 
+const checkIfBot = () => {
+  if (typeof window === 'undefined') return false;
+  const ua = window.navigator.userAgent.toLowerCase();
+  // Target social media bots and common crawlers to save ImageKit bandwidth
+  const botKeywords = [
+    'facebookexternalhit', 'facebot', 'messenger', 'whatsapp', 'telegrambot', 
+    'twitterbot', 'discordbot', 'instagram', 'googlebot', 'bingbot', 'crawler', 'spider'
+  ];
+  return botKeywords.some(keyword => ua.includes(keyword));
+};
+
+const IS_BOT = checkIfBot();
+
 // CardImage with Blur-Up Placeholder
 const CardImage = ({ src, alt, className, fetchPriority, width = 1000 }: { src: string, alt: string, className?: string, fetchPriority?: 'high' | 'low' | 'auto', width?: number }) => {
   const [isLoaded, setIsLoaded] = useState(false);
+  
+  // Prevent bots from fetching ImageKit images
+  if (IS_BOT && src.includes('imagekit.io')) {
+    return (
+      <div className={`bg-stone-100 animate-pulse ${className}`} />
+    );
+  }
+
   const finalSrc = src.replace('w-1000', `w-${width}`);
   const lqipSrc = src.replace('?tr=w-1000,q-80,f-auto', '?tr=w-20,bl-10,q-10,f-auto');
 
@@ -292,7 +313,7 @@ const AboutView = () => {
         </button>
 
         <div className="mt-4 flex flex-col items-center">
-          <img src="https://ik.imagekit.io/cursorstudios/chithi/logo%20with%20text.png?tr=w-400,q-80,f-auto" alt="Chithi Logo" className="h-16 md:h-20 mb-2" referrerPolicy="no-referrer" />
+          <img src="/logo with text.png" alt="Chithi Logo" className="h-16 md:h-20 mb-2" />
           <p className="text-sm text-stone-500 mb-10">
             A <a href="https://cursorstudios.net/" target="_blank" rel="noopener noreferrer" className="text-stone-900 font-medium hover:underline">Cursor Studios</a> Initiative
           </p>
@@ -417,7 +438,7 @@ const HomeView = () => {
       </Helmet>
       {/* Header */}
       <header className="w-full p-6 md:p-10 flex justify-between items-center z-10">
-        <img src="https://ik.imagekit.io/cursorstudios/chithi/logo.png?tr=w-200,q-80,f-auto" alt="Chithi Logo" className="h-9 md:h-11" referrerPolicy="no-referrer" />
+        <img src="/logo.png" alt="Chithi Logo" className="h-9 md:h-11" />
         <button onClick={() => navigate('/about')} className="text-sm font-medium uppercase tracking-widest text-stone-500 hover:text-stone-900 transition-colors">
           About
         </button>
@@ -1490,7 +1511,7 @@ const InstallBanner = ({ installPrompt, onInstall, visitCount }: { installPrompt
         <div className="bg-white/90 backdrop-blur-xl border border-stone-200 p-4 rounded-3xl shadow-2xl flex items-center justify-between gap-4">
           <div className="flex items-center gap-3 text-left">
             <div className="w-12 h-12 rounded-2xl bg-white border border-stone-100 flex items-center justify-center shrink-0 relative shadow-sm">
-              <img src="https://ik.imagekit.io/cursorstudios/chithi/logo.png?tr=w-100,q-80,f-auto" alt="Chithi Logo" className="w-8 h-8 object-contain" />
+              <img src="/logo.png" alt="Chithi Logo" className="w-8 h-8 object-contain" />
               <div className="absolute -bottom-1.5 -right-1.5 bg-stone-900 rounded-lg p-1.5 shadow-lg border-2 border-white">
                 <Download className="w-3 h-3 text-white" />
               </div>

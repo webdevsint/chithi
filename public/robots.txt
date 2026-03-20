@@ -1,0 +1,27 @@
+User-agent: *
+Disallow: /view
+Disallow: /create
+Disallow: /about
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Allow social media bots to crawl for meta tags (previews)
+# Our JS logic will still block them from fetching ImageKit assets
+User-agent: facebot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: Discordbot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
