@@ -1387,16 +1387,19 @@ const AnimatedRoutes = () => {
 // Giveaway Alert Component
 const GiveawayAlert = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const isDismissed = localStorage.getItem('chithi_giveaway_dismissed');
-    if (!isDismissed) {
+    if (!isDismissed && location.pathname === '/') {
       const timer = setTimeout(() => {
         setIsVisible(true);
       }, 2000);
       return () => clearTimeout(timer);
+    } else {
+      setIsVisible(false);
     }
-  }, []);
+  }, [location.pathname]);
 
   if (!isVisible) return null;
 
