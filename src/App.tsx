@@ -986,19 +986,29 @@ const SharedCardView = () => {
         />
       </div>
 
-      <div className="flex flex-col gap-3 mt-4 z-10">
+      <div className="flex flex-col sm:flex-row gap-3 mt-4 z-10 w-full max-w-[320px] md:max-w-[380px]">
         <motion.button
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6, duration: 0.5 }}
-          onClick={() => {
-            handleInstagramDownload(templateId, data);
-          }}
-          className="flex items-center justify-center px-6 py-3 bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white rounded-full shadow-md hover:shadow-lg transition-all font-medium text-sm"
+          onClick={() => handleDownloadFront(templateId)}
+          className="flex-1 flex items-center justify-center px-4 py-3 bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white rounded-full shadow-md hover:shadow-lg transition-all font-medium text-xs md:text-sm"
         >
-          <Download className="w-4 h-4 mr-2" /> Download Instagram Stories
+          <Download className="w-4 h-4 mr-2" /> Front Story
         </motion.button>
 
+        <motion.button
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.7, duration: 0.5 }}
+          onClick={() => handleDownloadBack(templateId, data)}
+          className="flex-1 flex items-center justify-center px-4 py-3 bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white rounded-full shadow-md hover:shadow-lg transition-all font-medium text-xs md:text-sm"
+        >
+          <Download className="w-4 h-4 mr-2" /> Back Story
+        </motion.button>
+      </div>
+
+      <div className="flex flex-col gap-3 mt-3 z-10 w-full max-w-[320px] md:max-w-[380px]">
         <motion.button
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -1014,12 +1024,11 @@ const SharedCardView = () => {
 };
 
 // ShareModal
-const handleInstagramDownload = async (templateId: number, data: any) => {
+const handleDownloadFront = async (templateId: number) => {
   const template = TEMPLATES[templateId as keyof typeof TEMPLATES];
   if (!template) return;
 
   try {
-    // 1. Download Front
     const frontImg = new Image();
     frontImg.crossOrigin = "Anonymous";
     frontImg.src = template.shareFront;
@@ -1042,8 +1051,16 @@ const handleInstagramDownload = async (templateId: number, data: any) => {
       frontLink.click();
       document.body.removeChild(frontLink);
     }
+  } catch (err) {
+    console.error('Failed to download front image:', err);
+  }
+};
 
-    // 2. Generate and Download Back (with overlay)
+const handleDownloadBack = async (templateId: number, data: any) => {
+  const template = TEMPLATES[templateId as keyof typeof TEMPLATES];
+  if (!template) return;
+
+  try {
     const canvas = document.createElement('canvas');
     canvas.width = 1080;
     canvas.height = 1920;
@@ -1284,12 +1301,21 @@ const ShareModal = ({ url, templateId, data, onClose }: { url: string, templateI
             <Download className="w-4 h-4" /> Download QR
           </button>
           
-          <button 
-            onClick={() => handleInstagramDownload(templateId, data)}
-            className="w-full py-3.5 flex items-center justify-center gap-2 bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white rounded-xl text-sm font-medium hover:opacity-90 transition-opacity"
-          >
-            <Download className="w-4 h-4" /> Instagram Stories
-          </button>
+          <div className="flex gap-2 w-full">
+            <button 
+              onClick={() => handleDownloadFront(templateId)}
+              className="flex-1 py-3.5 flex items-center justify-center gap-2 bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white rounded-xl text-xs md:text-sm font-medium hover:opacity-90 transition-opacity"
+            >
+              <Download className="w-4 h-4" /> Front Story
+            </button>
+
+            <button 
+              onClick={() => handleDownloadBack(templateId, data)}
+              className="flex-1 py-3.5 flex items-center justify-center gap-2 bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white rounded-xl text-xs md:text-sm font-medium hover:opacity-90 transition-opacity"
+            >
+              <Download className="w-4 h-4" /> Back Story
+            </button>
+          </div>
 
           <button onClick={handleCopy} className="w-full py-3.5 flex items-center justify-center gap-2 border border-stone-200 rounded-xl text-sm font-medium text-stone-700 hover:bg-stone-50 transition-colors">
             <Link className="w-4 h-4" /> {copied ? 'Copied!' : 'Copy Link'}
