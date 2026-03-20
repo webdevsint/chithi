@@ -1301,21 +1301,6 @@ const ShareModal = ({ url, templateId, data, onClose }: { url: string, templateI
             <Download className="w-4 h-4" /> Download QR
           </button>
           
-          <div className="flex gap-2 w-full">
-            <button 
-              onClick={() => handleDownloadFront(templateId)}
-              className="flex-1 py-3.5 flex items-center justify-center gap-2 bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white rounded-xl text-xs md:text-sm font-medium hover:opacity-90 transition-opacity"
-            >
-              <Download className="w-4 h-4" /> Front Story
-            </button>
-
-            <button 
-              onClick={() => handleDownloadBack(templateId, data)}
-              className="flex-1 py-3.5 flex items-center justify-center gap-2 bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white rounded-xl text-xs md:text-sm font-medium hover:opacity-90 transition-opacity"
-            >
-              <Download className="w-4 h-4" /> Back Story
-            </button>
-          </div>
 
           <button onClick={handleCopy} className="w-full py-3.5 flex items-center justify-center gap-2 border border-stone-200 rounded-xl text-sm font-medium text-stone-700 hover:bg-stone-50 transition-colors">
             <Link className="w-4 h-4" /> {copied ? 'Copied!' : 'Copy Link'}
