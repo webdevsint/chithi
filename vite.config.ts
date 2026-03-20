@@ -11,9 +11,11 @@ export default defineConfig(({mode}) => {
       react(), 
       tailwindcss(),
       VitePWA({
+        strategies: 'injectManifest',
+        srcDir: 'src',
+        filename: 'sw.ts',
         registerType: 'autoUpdate',
         injectRegister: 'auto',
-        includeAssets: ['favicon.ico', 'icons/apple-touch-icon.png', 'icons/favicon-32x32.png'],
         manifest: {
           name: 'চিঠি (Chithi) - Make Eid Personal',
           short_name: 'Chithi',
@@ -40,56 +42,8 @@ export default defineConfig(({mode}) => {
             }
           ]
         },
-        workbox: {
-          cacheId: 'chithi-cache-v4',
-          cleanupOutdatedCaches: true,
-          skipWaiting: true,
-          clientsClaim: true,
+        injectManifest: {
           globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2,json,webp}'],
-          runtimeCaching: [
-            {
-              urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
-              handler: 'CacheFirst',
-              options: {
-                cacheName: 'google-fonts-cache-v2',
-                expiration: {
-                  maxEntries: 10,
-                  maxAgeSeconds: 60 * 60 * 24 * 365 // <== 365 days
-                },
-                cacheableResponse: {
-                  statuses: [0, 200]
-                }
-              }
-            },
-            {
-              urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
-              handler: 'CacheFirst',
-              options: {
-                cacheName: 'gstatic-fonts-cache',
-                expiration: {
-                  maxEntries: 10,
-                  maxAgeSeconds: 60 * 60 * 24 * 365 // <== 365 days
-                },
-                cacheableResponse: {
-                  statuses: [0, 200]
-                },
-              }
-            },
-            {
-              urlPattern: /^https:\/\/ik\.imagekit\.io\/.*/i,
-              handler: 'CacheFirst', // Use CacheFirst for significantly faster template loading
-              options: {
-                cacheName: 'imagekit-cache',
-                expiration: {
-                  maxEntries: 200, // Cache more templates
-                  maxAgeSeconds: 60 * 60 * 24 * 60 // <== 60 days
-                },
-                cacheableResponse: {
-                  statuses: [0, 200]
-                }
-              }
-            }
-          ]
         }
       })
     ],
