@@ -259,7 +259,7 @@ const CardTemplate = ({ templateId, side, to, from, message, isThumbnail = false
     <div className="w-full h-full relative rounded-2xl overflow-hidden shadow-sm bg-stone-100">
       <CardImage src={template.back} alt="Card Back" className="w-full h-full" fetchPriority={fetchPriority} width={imageWidth} />
       <div className={`absolute inset-0 flex flex-col items-center pt-[15%] ${isThumbnail ? 'pb-[35%] px-6 md:pb-[32%] md:px-8 lg:pb-[30%] lg:px-12' : 'pb-[30%] px-8 md:pb-[30%] md:px-12'} text-center`} style={{ color: template.textColor }}>
-        <p className={`font-serif ${isThumbnail ? 'text-lg md:text-[22px] lg:text-2xl' : 'text-xl md:text-2xl'} mb-2 leading-relaxed`}>Dear {to},</p>
+        <p className={`font-serif ${isThumbnail ? 'text-xl md:text-[26px] lg:text-3xl' : 'text-2xl md:text-3xl'} mb-2 leading-relaxed`}>Dear {to},</p>
         <div className="flex-1 flex items-center justify-center w-full">
           <p className={`font-sans ${isThumbnail ? 'text-xs md:text-[15px] lg:text-base leading-relaxed lg:leading-loose max-w-[90%] md:max-w-[85%]' : 'text-sm md:text-base leading-loose max-w-[85%] md:leading-loose md:max-w-[85%]'} opacity-90 whitespace-pre-wrap`}>{message}</p>
         </div>
@@ -1090,7 +1090,7 @@ const handleDownloadBack = async (templateId: number, data: any) => {
 
     // 1. Dear {To}
     ctx.fillStyle = '#1c1917'; // stone-900
-    ctx.font = '64px "Playfair Display", serif';
+    ctx.font = '88px "Playfair Display", serif';
     ctx.fillText(`Dear ${data.to || 'Recipient'},`, 540, startY);
 
     // 2. Message (Gap of 130px from Dear)
