@@ -210,6 +210,7 @@ const CATEGORIES: { name: Category; templates: number[] }[] = [
 ];
 
 const checkIfBot = () => {
+  // Version: 1.0.2
   if (typeof window === 'undefined') return false;
   const ua = window.navigator.userAgent.toLowerCase();
   
