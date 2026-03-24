@@ -1,5 +1,5 @@
 /// <reference lib="webworker" />
-// SW Version: 1.0.2 - Refined Bot Detection
+// SW Version: 1.0.3 - Hiatus Landing Page Updates
 import { precacheAndRoute, cleanupOutdatedCaches } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
 import { CacheFirst } from 'workbox-strategies';
@@ -29,7 +29,7 @@ const isBot = (userAgent: string) => {
 registerRoute(
   ({ url }) => url.origin === 'https://ik.imagekit.io',
   new CacheFirst({
-    cacheName: 'imagekit-cache-v3',
+    cacheName: 'imagekit-cache-v4',
     plugins: [
       {
         requestWillFetch: async ({ request }) => {
@@ -56,7 +56,7 @@ registerRoute(
 registerRoute(
   ({ url }) => url.origin === 'https://fonts.googleapis.com',
   new CacheFirst({
-    cacheName: 'google-fonts-cache-v3',
+    cacheName: 'google-fonts-cache-v4',
     plugins: [
       new ExpirationPlugin({
         maxEntries: 10,
@@ -72,7 +72,7 @@ registerRoute(
 registerRoute(
   ({ url }) => url.origin === 'https://fonts.gstatic.com',
   new CacheFirst({
-    cacheName: 'gstatic-fonts-cache-v2',
+    cacheName: 'gstatic-fonts-cache-v3',
     plugins: [
       new ExpirationPlugin({
         maxEntries: 10,
