@@ -90,7 +90,7 @@ export default function App() {
     <HelmetProvider>
       <BrowserRouter>
         <div className="min-h-screen bg-[#fcfcfc] font-sans text-stone-900 selection:bg-stone-200">
-          <GiveawayAlert />
+          {/* <GiveawayAlert /> */}
           <AnimatedRoutes />
           <InstallBanner installPrompt={installPrompt} onInstall={handleInstallClick} visitCount={visitCount} />
         </div>

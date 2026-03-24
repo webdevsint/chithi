@@ -11,3 +11,23 @@ createRoot(document.getElementById('root')!).render(
     </HelmetProvider>
   </StrictMode>,
 );
+
+// Aggressively unregister outdated service workers to force the hiatus update
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.getRegistrations().then((registrations) => {
+    for (let registration of registrations) {
+      registration.unregister().then(() => {
+        console.log('ServiceWorker unregistered to force cache bust.');
+      });
+    }
+  });
+
+  // Also clear window caches
+  if (window.caches) {
+    caches.keys().then((names) => {
+      for (let name of names) {
+        caches.delete(name);
+      }
+    });
+  }
+}
